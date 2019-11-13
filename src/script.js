@@ -1,11 +1,18 @@
-var itemNames = ["Speedball Oblique Pen Holder", "", "", ""];
-var itemCounts = [0, 0, 0, 0];
-var itemPrices = [2.38, 0, 0, 0]
+var itemNames = ["Speedball Oblique Pen Holder", "Speedball Standard Point Dip Pen Nibs, Pack of 2", 
+	"Higgins Calligraphy Ink - 2.5 oz, Black, Waterproof, Pigment Based", "Bee Paper Aquabee Calligraphy Practice Pad - 9'' x 12'', 50 Sheets",
+	"Staedtler Mars Plastic Eraser - Pack of 4", "Bob's Fine Vine Charcoal",
+	"General's Wide Compressed Graphite Sticks", "Loew-Cornell Blending Stumps",
+	"Blick Matte Fixative"];
+var itemCounts = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var itemPrices = [2.38, 2.91, 3.59, 6.57, 
+	5.49, 12.49, 1.00, 4.49, 5.98]
 console.log("Active.");
 
 // Fill in list of items.
 var tableBodyElement = document.getElementById('itemList');
-insertRow(0, tableBodyElement);
+for (var i = 0; i < itemNames.length; i++) {
+	insertRow(i, tableBodyElement);
+}
 /*
   Create a structure like the following:
   <tr>
