@@ -14,10 +14,12 @@ var tableBodyElement = document.getElementById('itemList');
 for (var i = 0; i < itemNames.length; i++) {
 	insertRow(i, tableBodyElement);
 }
-console.log("Reached subtotal insertion.");
-insertSubtotalRow(tableBodyElement);
-insertTaxRow(tableBodyElement);
-insertGrandTotalRow(tableBodyElement);
+//insertSubtotalRow(tableBodyElement);
+insertSpecialRow(tableBodyElement, "subtotal", "Subtotal", calculateSubtotal);
+insertSpecialRow(tableBodyElement, "tax", "Tax", calculateTax);
+insertSpecialRow(tableBodyElement, "grandTotal", "Grand Total", calculateGrandTotal);
+//insertTaxRow(tableBodyElement);
+//insertGrandTotalRow(tableBodyElement);
 
 
 /*
@@ -39,53 +41,20 @@ function insertRow(i, insertInto) {
 /*
  * Insert the subtotal row.
  */
-function insertSubtotalRow(insertInto) {
+function insertSpecialRow(insertInto, id, label, methodName) {
 	const rowElement = document.createElement('tr');
 	insertNameColumn("", rowElement);
-	insertNameColumn("Subtotal", rowElement);
+	insertNameColumn(label, rowElement);
 	
 	const itemColElement = document.createElement('td');
 	const itemColSpan = document.createElement('span');
-	itemColSpan.setAttribute('id', "subtotal")
-	itemColSpan.innerText = calculateSubtotal();
+	itemColSpan.setAttribute('id', id)
+	itemColSpan.innerText = methodName();
 	
 	itemColElement.innerHTML += itemColSpan.outerHTML;
 	rowElement.innerHTML += itemColElement.outerHTML;
 	
 	insertInto.innerHTML += rowElement.outerHTML;
-}
-
-function insertTaxRow(insertInto){
-	const rowElement = document.createElement('tr');
-	insertNameColumn("", rowElement);
-	insertNameColumn("Tax (6%)", rowElement);
-	
-	const itemColElement = document.createElement('td');
-	const itemColSpan = document.createElement('span');
-	itemColSpan.setAttribute('id', "tax")
-	itemColSpan.innerText = calculateTax();
-	
-	itemColElement.innerHTML += itemColSpan.outerHTML;
-	rowElement.innerHTML += itemColElement.outerHTML;
-	
-	insertInto.innerHTML += rowElement.outerHTML;	
-}
-
-function insertGrandTotalRow(insertInto) {
-	const rowElement = document.createElement('tr');
-	insertNameColumn("", rowElement);
-	insertNameColumn("Total", rowElement);
-	
-	const itemColElement = document.createElement('td');
-	const itemColSpan = document.createElement('span');
-	itemColSpan.setAttribute('id', "grandTotal")
-	itemColSpan.innerText = calculateGrandTotal();
-	
-	itemColElement.innerHTML += itemColSpan.outerHTML;
-	rowElement.innerHTML += itemColElement.outerHTML;
-	
-	insertInto.innerHTML += rowElement.outerHTML;	
-	
 }
 
 /*
@@ -100,7 +69,7 @@ function insertNameColumn(name, row) {
 
 function insertCostColumn(cost, row) {
 	  const itemColElement = document.createElement('td');
-	  itemColElement.innerText = cost;
+	  itemColElement.innerText = cost.toFixed(2);
 	  
 	  row.innerHTML += itemColElement.outerHTML;
 	}
@@ -171,18 +140,18 @@ function calculateSubtotal() {
 	for (var i = 0; i < itemNames.length; i++) {
 		subtotal += (itemCounts[i] * itemPrices[i]);
 	}
-	return subtotal;
+	return subtotal.toFixed(2);
 }
 
 function calculateTax() {
 	var subtotal = calculateSubtotal();
-	return 0.06 * subtotal;
+	return (0.06 * subtotal).toFixed(2);
 }
 
 function calculateGrandTotal() {
-	var subtotal = calculateSubtotal();
-	var tax = calculateTax(subtotal);
-	return subtotal + tax;
+	var subtotal = Number(calculateSubtotal());
+	var tax = Number(calculateTax(subtotal));
+	return (subtotal + tax).toFixed(2);
 }
 
 /* 
