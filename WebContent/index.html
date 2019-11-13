@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta
+   name="viewport"
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta
+   name="description"
+   content="">
+<meta
+   name="author"
+   content="Kevin Flory after content by Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<title>DEBUG: index.html</title>
+<!-- Latest compiled and minified CSS -->
+<link
+   rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- Custom styles for this template -->
+</head>
+<body class="text-center">
+   <div class="container">
+      <header> </header>
+      <main role="main"> <!--
+Task:
+Create a web page with JavaScript to track and display an itemized shopping list and total.
+What Will the Application Do?
+● Display a list of products and prices with Add buttons
+● When the user clicks a Check Out button, display all the items purchased and their
+prices along with a grand total.
+Build Specifications
+1. You need to have a list of items on the page to select from. When you click on the
+“add item” button, this item should be added to your shopping list.
+2. Create an array for the items and an array for the corresponding prices
+3. Loop through the arrays, printing out the name and price of each item on a new
+line.
+4. Total up the combined cost of all of your items with the amount’s label being “total.”
+Hints
+●
+●
+●
+In JavaScript, arrays are enclosed in square brackets. [ ]
+Remember to keep track of the total of all the prices and print this separately.
+To keep it simple at first, you can display your output in an alert box. When that’s
+working, display it in a separate part of this page.
+Extended Challenges
+● Use CSS to dress up the page
+● Include quantities of items--either have a field next to the item for quantity to add,
+or have every button click add another one of that item, or have + and - buttons (but
+don’t let the user have a negative number of items!)
+● Calculate and display sales tax (Michigan 6%) and grand total. Round all numbers to 2 digits. -->
+      <div class="container">
+         <table class="table table-bordered">
+            <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Unit Cost</th>
+                  <th scope="col">Number</th>
+               </tr>
+            </thead>
+            <tbody id='itemList'>
+            </tbody>
+            </div>
+      </main>
+      <footer> </footer>
+
+      <!-- jQuery library -->
+      <script
+         type="text/javascript"
+         src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script
+         type="text/javascript"
+         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" ></script>
+      <script type="text/javascript" src="../src/script.js"></script>
+      <script type="text/javascript">
+      	console.log("A script was called.");
+      </script>
+</body>
+</html>
