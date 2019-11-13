@@ -10,9 +10,12 @@ console.log("Active.");
 
 // Fill in list of items.
 var tableBodyElement = document.getElementById('itemList');
+//insertHeaderRow(tableBodyElement);
 for (var i = 0; i < itemNames.length; i++) {
 	insertRow(i, tableBodyElement);
 }
+insertSubtotalRow(tableBodyElement);
+
 /*
   Create a structure like the following:
   <tr>
@@ -34,22 +37,81 @@ function insertRow(i, insertInto) {
   insertInto.innerHTML += rowElement.outerHTML;
 }
 
+/*
+function insertHeaderRow(insertInto) {
+	  const rowElement = document.createElement('tr');
+	  // Use .innerHTML, -not- appendChild. Remember, there's not a 1:1 mapping between the HTML tree ad the DOM tree!
+	  insertNameHeader(rowElement);
+	  insertCostHeader(rowElement);
+	  insertCountHeader(rowElement);
+	  insertInto.innerHTML += rowElement.outerHTML;
+	}
+*/
+function calculateSubtotal() {
+	var subtotal = 0;
+	for (var i = 0; i < itemNames.length; i++) {
+		subtotal += (itemCounts[i] * itemPrices[i]);
+	}
+	return subtotal;
+}
+
+function insertSubtotalRow(insertInto) {
+	const rowElement = document.createElement('tr');
+	insertNameColumn("", rowElement);
+	insertNameColumn("Subtotal", rowElement);
+	
+	const itemColElement = document.createElement('td');
+	const itemColSpan = document.createElement('span');
+	itemColSpan.innerText = calculateSubtotal();
+	
+	itemColElement.innerHTML += itemColSpan.outerHTML;
+	rowElement.innerHTML += itemColElement.outerHTML;
+	
+	insertInto.innerHTML += rowElement.outerHTML;
+}
+
+function insertTaxRow(insertInto){
+	
+}
+
+function insertGrandTotalRow(insertInto) {
+	
+}
+function insertNameHeader(row) {
+  const itemColElement = document.createElement('td');
+  itemColElement.innerText = "Name";
+  
+  row.innerHTML += itemColElement.outerHTML;
+}
+
 function insertNameColumn(name, row) {
+	  const itemColElement = document.createElement('th');
+	  itemColElement.setAttribute("scope", "col");
+	  itemColElement.innerText = name;
+	  
+	  row.innerHTML += itemColElement.outerHTML;
+	}
+
+function insertCostHeader(row) {
   const itemColElement = document.createElement('th');
   itemColElement.setAttribute("scope", "col");
-  itemColElement.innerText = name;
+  itemColElement.innerText = "Unit Cost";
   
   row.innerHTML += itemColElement.outerHTML;
 }
 
 function insertCostColumn(cost, row) {
-  const itemColElement = document.createElement('th');
-  itemColElement.setAttribute("scope", "col");
-  itemColElement.innerText = cost;
-  
-  row.innerHTML += itemColElement.outerHTML;
-}
+	  const itemColElement = document.createElement('td');
+	  itemColElement.innerText = cost;
+	  
+	  row.innerHTML += itemColElement.outerHTML;
+	}
 
+function insertCountHeader(row) {
+	  const itemColElement = document.createElement('td');
+	  itemColElement.innerText = "Number in Cart"
+
+}
 function insertCountColumn(i, numberAtI, row) {
   const itemColElement = document.createElement('th');
   itemColElement.setAttribute("scope", "col");
